@@ -1,10 +1,16 @@
 import './styles.css';
-import BasicUpload from './BasicUpload';
+import UploadExample from './UploadExample';
+import DraggerExample from './DraggerExample';
 
 export default function App() {
   return (
     <div className="App">
-      <BasicUpload />
+      <UploadExample />
+      <br />
+      <br />
+      <hr />
+      <br />
+      <DraggerExample />
     </div>
   );
 }

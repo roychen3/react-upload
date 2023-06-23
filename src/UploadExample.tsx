@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Upload from './Upload';
 import type { DropFile } from './Upload/types';
 
-const BasicUpload = () => {
+const UploadExample = () => {
   const [uploadFile, setUploadFile] = useState<DropFile>();
   const [uploadFiles, setUploadFiles] = useState<DropFile[]>([]);
   const [uploadDirectory, setUploadDirectory] = useState<DropFile[]>([]);
@@ -23,6 +23,7 @@ const BasicUpload = () => {
 
       <br />
       <br />
+      <hr />
       <br />
 
       <div>
@@ -44,6 +45,7 @@ const BasicUpload = () => {
 
       <br />
       <br />
+      <hr />
       <br />
 
       <div>
@@ -67,4 +69,4 @@ const BasicUpload = () => {
   );
 };
 
-export default BasicUpload;
+export default UploadExample;

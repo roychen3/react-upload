@@ -27,6 +27,7 @@ const DraggerExample = () => {
           setUploadLoading(true);
         }}
         multiple
+        disabled={uploadLoading}
       >
         <div
           style={{

@@ -9,8 +9,8 @@ export type DropFile = {
 
 export interface FileInputProps
   extends Omit<
-    React.HTMLAttributes<HTMLInputElement>,
-    'onChange' | 'type' | 'ref' | 'style'
+    React.HTMLProps<HTMLInputElement>,
+    'value' | 'type' | 'ref' | 'style' | 'onChange'
   > {
   multiple?: boolean;
   directory?: boolean;
@@ -49,9 +49,14 @@ export interface DraggerProps extends DraggerHTMLProps {
   onDragEnd?: (event: React.DragEvent) => void;
 }
 
-export interface UploadProps {
+type UploadHTMLProps = Omit<
+  React.HTMLProps<HTMLDivElement>,
+  'multiple' | 'directory' | 'children' | 'onChange' | 'onClick' | 'disabled'
+>;
+export interface UploadProps extends UploadHTMLProps {
   multiple?: boolean;
   directory?: boolean;
+  disabled?: boolean;
   children: ReactNode;
   onChange?: (
     fileList: DropFile[],

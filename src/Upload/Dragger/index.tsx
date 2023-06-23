@@ -68,7 +68,6 @@ const Dragger = ({
 
   return (
     <div
-      {...props}
       onClick={handleDragClick}
       onDragEnter={handleDragEnter}
       onDragOver={handleDragOver}
@@ -76,12 +75,14 @@ const Dragger = ({
       onDrop={handleDrop}
       onDragEnd={onDragEnd}
       data-testid="dragger"
+      {...props}
     >
       <FileInput
         ref={inputRef}
         multiple={multiple}
         directory={directory}
         onChange={onChange}
+        disabled={disabled}
       />
       {children}
     </div>

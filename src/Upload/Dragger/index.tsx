@@ -20,7 +20,7 @@ const Dragger = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const isDragEnter = useRef(false);
 
-  const handleDrop = async (event: React.DragEvent) => {
+  const handleDrop = async (event: React.DragEvent<HTMLDivElement>) => {
     if (!disabled) {
       event.preventDefault();
       isDragEnter.current = false;
@@ -29,7 +29,7 @@ const Dragger = ({
       }
       if (onChange) {
         const fileList = await getDropFile(event.dataTransfer.items);
-        onChange(fileList);
+        onChange(fileList, event);
       }
     }
   };

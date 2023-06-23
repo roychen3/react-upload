@@ -38,15 +38,15 @@ export interface DraggerProps extends DraggerHTMLProps {
   directory?: boolean;
   clickable?: boolean;
   disabled?: boolean;
-  children: ReactNode;
   onChange?: (
     fileList: DropFile[],
-    event?: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLDivElement>
   ) => void;
   onDrop?: (event: React.DragEvent) => void;
   onDragEnter?: (event: React.DragEvent) => void;
   onDragLeave?: (event: React.DragEvent) => void;
   onDragEnd?: (event: React.DragEvent) => void;
+  children: ReactNode;
 }
 
 type UploadHTMLProps = Omit<
@@ -57,9 +57,9 @@ export interface UploadProps extends UploadHTMLProps {
   multiple?: boolean;
   directory?: boolean;
   disabled?: boolean;
-  children: ReactNode;
   onChange?: (
     fileList: DropFile[],
     event: React.ChangeEvent<HTMLInputElement>
   ) => void;
+  children: ReactNode;
 }

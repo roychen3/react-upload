@@ -29,7 +29,7 @@ describe('Component: Upload utils', () => {
   });
 
   test('traverseFileTree: directory entry case', async () => {
-    const entry: any = mockDirectoryEntry;
+    const entry = mockDirectoryEntry as FileSystemDirectoryEntry;
     const result = await traverseFileTree(entry);
     const expectValue = [
       {
@@ -43,6 +43,18 @@ describe('Component: Upload utils', () => {
         file: mockTherefile,
         path: `folder A/${mockTherefile.name}`,
         folderName: 'folder A',
+      },
+      {
+        uid: result[2].uid,
+        file: mockHelloFile,
+        path: `folder B/${mockHelloFile.name}`,
+        folderName: 'folder B',
+      },
+      {
+        uid: result[3].uid,
+        file: mockTherefile,
+        path: `folder B/${mockTherefile.name}`,
+        folderName: 'folder B',
       },
     ];
     expect(result).toStrictEqual(expectValue);
@@ -69,6 +81,18 @@ describe('Component: Upload utils', () => {
         file: mockTherefile,
         path: `folder A/${mockTherefile.name}`,
         folderName: 'folder A',
+      },
+      {
+        uid: result[3].uid,
+        file: mockHelloFile,
+        path: `folder B/${mockHelloFile.name}`,
+        folderName: 'folder B',
+      },
+      {
+        uid: result[4].uid,
+        file: mockTherefile,
+        path: `folder B/${mockTherefile.name}`,
+        folderName: 'folder B',
       },
     ];
     expect(result).toStrictEqual(expectValue);

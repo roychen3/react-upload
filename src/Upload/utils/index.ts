@@ -20,17 +20,35 @@ export function traverseFileTree(entry: FileSystemEntry): Promise<DropFile[]> {
     } else if (entry.isDirectory) {
       const directoryEntry = entry as FileSystemDirectoryEntry;
       const dirReader = directoryEntry.createReader();
-      dirReader.readEntries(async (entries) => {
-        const resultPromises = entries.map((entry) => traverseFileTree(entry));
-        const promiseAllResult = await Promise.all(resultPromises);
-        const result = promiseAllResult.reduce<DropFile[]>(
-          (prevValue, current) => {
-            return [...prevValue, ...current];
-          },
-          []
-        );
-        resolve(result);
-      });
+      const readEntries = (): Promise<DropFile[]> => {
+        return new Promise((readEntriesResolve) => {
+          dirReader.readEntries(async (entries) => {
+            if (entries.length > 0) {
+              const resultPromises = entries.map((entry) =>
+                traverseFileTree(entry)
+              );
+              const promiseAllResult = await Promise.all(resultPromises);
+              const result = promiseAllResult.reduce<DropFile[]>(
+                (prevValue, current) => {
+                  return [...prevValue, ...current];
+                },
+                []
+              );
+
+              // Recursively call readEntries() again.
+              //
+              // On Chrome 77, readEntries() will only return the first 100 FileSystemEntry instances.
+              // In order to obtain all of the instances, readEntries() must be called multiple times.
+              // See: https://developer.mozilla.org/en-US/docs/Web/API/FileSystemDirectoryReader/readEntries#browser_compatibility
+              const nestedResult = await readEntries();
+              readEntriesResolve([...result, ...nestedResult]);
+            } else {
+              readEntriesResolve([]);
+            }
+          });
+        });
+      };
+      readEntries().then(resolve);
     }
   });
 }

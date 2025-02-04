@@ -111,6 +111,18 @@ describe('Component: Dragger', () => {
         path: `folder A/${mockTherefile.name}`,
         folderName: 'folder A',
       },
+      {
+        uid: testThreeCallback[3].uid,
+        file: mockHelloFile,
+        path: `folder B/${mockHelloFile.name}`,
+        folderName: 'folder B',
+      },
+      {
+        uid: testThreeCallback[4].uid,
+        file: mockTherefile,
+        path: `folder B/${mockTherefile.name}`,
+        folderName: 'folder B',
+      },
     ];
     expect(testThreeCallback).toStrictEqual(expectThreeCallback);
   });
